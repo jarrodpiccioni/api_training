@@ -4,6 +4,7 @@ import json
 DATA_DIR = Path("data")
 PROFILES_FILE = DATA_DIR / "profiles.json"
 RESERVATIONS_FILE = DATA_DIR / "reservations.json"
+USERS_FILE = DATA_DIR / "users.json"
 
 def load_profiles_data():
   if PROFILES_FILE.exists():
@@ -30,3 +31,11 @@ def save_reservations_data(data):
   DATA_DIR.mkdir(parents=True, exist_ok=True)
   with open(RESERVATIONS_FILE, "w") as f:
     json.dump(data, f, indent=4)
+
+def load_users_data():
+  if USERS_FILE.exists():
+    with open(USERS_FILE, "r") as f:
+      users = f.read()
+      if users.strip():
+        return json.loads(users)
+  return []
