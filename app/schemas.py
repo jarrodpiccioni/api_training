@@ -16,6 +16,7 @@ class ProfileView(BaseModel):
   email: str
   postal_code: str
   age: int
+  created_by: str
 
 class ProfileUpdate(BaseModel):
   name: Optional[str] = Field(min_length=3, max_length=30)
