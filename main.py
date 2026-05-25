@@ -5,6 +5,8 @@ from datetime import timedelta
 from app.routes.profiles import router as profiles_router
 from app.routes.reservations import router as reservations_router
 
+from app.middleware.timer import timer_middleware
+
 from app.auth import authenticate_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
 """
 Instructions: https://docs.google.com/document/d/16nB2sOOswO9x7Iiub7LiqOEXsaKfk0v-k4tlxxdaG94/edit?tab=t.0
@@ -15,8 +17,11 @@ Resources Used:
 """
 app = FastAPI()
 
+app.middleware("http")(timer_middleware)
+
 app.include_router(profiles_router)
 app.include_router(reservations_router)
+
 
 @app.post("/token")
 async def login(form: OAuth2PasswordRequestForm = Depends()):

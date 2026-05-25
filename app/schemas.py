@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from enum import Enum
-from typing import Optional
+from typing import Optional, List
 
 class ProfileCreate(BaseModel):
   name: str = Field(min_length=3, max_length=30)
@@ -17,6 +17,7 @@ class ProfileView(BaseModel):
   postal_code: str
   age: int
   created_by: str
+
 
 class ProfileUpdate(BaseModel):
   name: Optional[str] = Field(min_length=3, max_length=30)
@@ -43,9 +44,18 @@ class ReservationView(BaseModel):
   name: str
   phone_number: str
   num_guests: int
-  occasion: ReservationOccasion
+  occasion: Optional[ReservationOccasion] = None
   date: str
   time: str
+
+class PaginatedReservationView(BaseModel):
+  reservations: List[ReservationView]
+  total: int
+
+class ReservationCreatedConfirm(BaseModel):
+  reservation: ReservationView
+  message: str
+  reservation_id: str
 
 class ReservationUpdate(BaseModel):
   name: Optional[str] = Field(min_length=3, max_length=30)

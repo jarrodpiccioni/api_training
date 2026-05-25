@@ -1,0 +1,62 @@
+[
+    {
+        "id": "1",
+        "name": "Blue Jamieson",
+        "phone_number": "800-555-1234",
+        "num_guests": 4,
+        "occasion": "Other",
+        "date": "2024-07-01",
+        "time": "19:00"
+    },
+    {
+        "id": "57cb860d73b543f1901819d345da651e",
+        "name": "Jarrod Piccioni",
+        "phone_number": "800-999-7777",
+        "num_guests": 13,
+        "occasion": "Birthday",
+        "date": "July 13, 2026",
+        "time": "19:00",
+        "created_by": "jarrod"
+    },
+    {
+        "id": "da6722613523475b941afb4e318e4e8e",
+        "name": "Jarrod Piccioni",
+        "phone_number": "800-999-7777",
+        "num_guests": 13,
+        "occasion": "Birthday",
+        "date": "July 13, 2026",
+        "time": "19:00",
+        "created_by": "jarrod"
+    },
+    {
+        "id": "044446cf663940dd9217ba5b98871817",
+        "name": "Jarrod Piccioni",
+        "phone_number": "800-999-7777",
+        "num_guests": 13,
+        "occasion": "Birthday",
+        "date": "July 13, 2026",
+        "time": "19:00",
+        "created_by": "jarrod"
+    },
+    {
+        "id": "0bffa7e403b74cfba7b15873426da5a9",
+        "name": "string",
+        "phone_number": "string",
+        "num_guests": 1,
+        "occasion": "Birthday",
+        "date": "string",
+        "time": "string",
+        "created_by": "jarrod"
+    },
+    {
+        "id": "6b9bff3151e440c082611805f0221ed9",
+        "name": "string",
+        "phone_number": "string",
+        "num_guests": 1,
+        "occasion": "Birthday",
+        "date": "string",
+        "time": "string",
+        "created_by": "jarrod",
+        "idempotency_key": "test"
+    }
+]
