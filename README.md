@@ -15,7 +15,7 @@
 |Create Reservation|/reservations|POST|Must be Idempotent to prevent double-booking upon retry.| Done |
 |View ALL Reservations|/reservations|GET|Mandatory: Must implement Pagination (e.g., ?limit=10&offset=0).| Done |
 |View SINGLE Reservation|/reservations/{date}|GET|Use Path Parameters to identify a unique reservation.| Done |
-|Update Reservation|/reservations/{date}|PUT or PATCH|Use Path Parameters to identify the resource. PUT for complete replacement, PATCH for partial update.|  |
+|Update Reservation|/reservations/{date}|PUT or PATCH|Use Path Parameters to identify the resource. PUT for complete replacement, PATCH for partial update.| Done |
 |Cancel Reservation|/reservations/{date}|DELETE|Use status_code=204 (No Content) on success.| Done |
 |Check Profile Status|/profile-check/{phone_number}|GET|Use a separate endpoint to satisfy the requirement to "Check if the user has an account or not first - using Phone Number and Name".| Done |
 
