@@ -1,4 +1,12 @@
 # api_training
+## Notes:
+- Resources used:
+  - https://www.youtube.com/watch?v=8TMQcRcBnW8
+  - https://devsheets.io/sheets/fastapi
+  - https://fastapi.tiangolo.com/learn/
+  - https://pydantic.dev/docs/validation/latest/get-started/
+  - Gemini Pro assisted with debugging, not generating code
+
 ## API Architecture:
 |Functionality|Recommended RESTful Path|HTTP Method|Notes for Training Assignment|Status|
 |-------------|------------------------|-----------|-----------------------------|------|
@@ -9,7 +17,7 @@
 |View SINGLE Reservation|/reservations/{date}|GET|Use Path Parameters to identify a unique reservation.|  |
 |Update Reservation|/reservations/{date}|PUT or PATCH|Use Path Parameters to identify the resource. PUT for complete replacement, PATCH for partial update.|  |
 |Cancel Reservation|/reservations/{date}|DELETE|Use status_code=204 (No Content) on success.|  |
-|Check Profile Status|/profile-check/{phone_number}|GET|Use a separate endpoint to satisfy the requirement to "Check if the user has an account or not first - using Phone Number and Name".|  |
+|Check Profile Status|/profile-check/{phone_number}|GET|Use a separate endpoint to satisfy the requirement to "Check if the user has an account or not first - using Phone Number and Name".| Done |
 
 ## Recommended Additions
 The following elements should be added:

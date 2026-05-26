@@ -1,7 +1,7 @@
 import uuid
 from fastapi import APIRouter, HTTPException, status, Depends
 from app.storage import load_profiles_data, save_profiles_data
-from app.schemas import ProfileCreate, ProfileView, ProfileUpdate
+from app.schemas import CleanPhoneNumber, ProfileCreate, ProfileView, ProfileUpdate
 from app.auth import get_current_user
 
 router = APIRouter(prefix="/api/v1", tags=["profile"])
@@ -27,8 +27,11 @@ async def create_profile(profile: ProfileCreate, current_user: dict = Depends(ge
   save_profiles_data(profiles)
   return {"message": "Profile created successfully", "profile_id": new_profile["id"]}
 
-'''
-@router.get("/profile-check/{phone_number}")
 # Check Profile Status
 # Use a separate endpoint to satisfy the requirement to "Check if the user has an account or not first - using Phone Number and Name"
-'''
+@router.get("/profile-check/{phone_number}")
+async def check_profile(phone_number: CleanPhoneNumber, name: str | None = None):
+  for profile in profiles:
+    if profile.get("phone_number") == phone_number and (name is None or profile.get("name") == name):
+      return {"exists": True, "message": "Profile already exists"}
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"No profile found for phone number {phone_number} and name {name}")
