@@ -2,7 +2,7 @@ import re
 from pydantic import BaseModel, Field, BeforeValidator
 from enum import Enum
 from typing import Optional, List, Annotated
-
+from datetime import date, time
 
 def clean_phone_number(value: str) -> str:
   cleaned = re.sub(r'\D', '', value)
@@ -48,8 +48,8 @@ class ReservationCreate(BaseModel):
   phone_number: CleanPhoneNumber
   num_guests: int = Field(ge=1)
   occasion: Optional[ReservationOccasion] = None
-  date: str
-  time: str
+  date: date
+  time: time
 
 class ReservationView(BaseModel):
   id: str
@@ -57,8 +57,8 @@ class ReservationView(BaseModel):
   phone_number: CleanPhoneNumber
   num_guests: int
   occasion: Optional[ReservationOccasion] = None
-  date: str
-  time: str
+  date: date
+  time: time
 
 class PaginatedReservationView(BaseModel):
   reservations: List[ReservationView]
@@ -74,5 +74,5 @@ class ReservationUpdate(BaseModel):
   phone_number: Optional[CleanPhoneNumber]
   num_guests: Optional[int] = Field(ge=1)
   occasion: Optional[ReservationOccasion]
-  date: Optional[str]
-  time: Optional[str]
+  date: Optional[date]
+  time: Optional[time]

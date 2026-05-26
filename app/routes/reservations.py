@@ -2,7 +2,8 @@ import uuid
 from fastapi import APIRouter, HTTPException, status, Header, Depends
 from app.auth import get_current_user
 from app.storage import load_reservations_data, save_reservations_data
-from app.schemas import ReservationUpdate, PaginatedReservationView, ReservationView, ReservationOccasion, ReservationCreate, ReservationCreatedConfirm
+from app.schemas import ReservationUpdate, PaginatedReservationView, ReservationView, ReservationCreate, ReservationCreatedConfirm
+from datetime import date
 
 router = APIRouter(prefix="/api/v1/reservations", tags=["reservations"])
 
@@ -28,18 +29,35 @@ async def create_reservation(reservation: ReservationCreate, current_user: dict 
   save_reservations_data(reservations)
   return {"reservation": new_reservation, "message": f"Reservation created successfully for {reservation.name} on {reservation.date} at {reservation.time} by {current_user['username']}", "reservation_id": new_reservation["id"], "idempotency_key": idempotency_key}
 
-
-
-'''
-@router.get("/{date}")
 # View SINGLE Reservation
 # Use Path Parameters to identify a unique reservation
+@router.get("/{date}")
+async def get_reservation(date: date):
+  for reservation in reservations:
+    if reservation["date"] == date.isoformat():
+      return reservation
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Reservation not found for date: {date}")
 
-@router.PUT("/{date}")
+
+# Cancel Reservation
+# Use status_code=204 (No Content) on success
+@router.delete("/{date}", status_code=status.HTTP_204_NO_CONTENT)
+async def cancel_reservation(date: date):
+  for reservation in reservations:
+    if reservation["date"] == date.isoformat():
+      reservations.remove(reservation)
+      save_reservations_data(reservations)
+      return None
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Reservation not found for date: {date}")
+
 # Update Reservation
 # Use Path Parameters to identify the resource. PUT for complete replacement, PATCH for partial update
-
-@router.DELETE("/{date}")
-# Cancel Reservation
-# Use status_code=201 (No Content) on success
-'''
+@router.patch("/{date}", response_model=ReservationView)
+async def update_reservation(date: date, reservation_update: ReservationUpdate):
+  for reservation in reservations:
+    if reservation["date"] == date.isoformat():
+      update_data = reservation_update.model_dump(exclude_unset=True)
+      reservation.update(update_data)
+      save_reservations_data(reservations)
+      return reservation
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Reservation not found for date: {date}")
