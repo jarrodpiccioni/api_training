@@ -32,11 +32,11 @@ class ProfileView(BaseModel):
 
 
 class ProfileUpdate(BaseModel):
-  name: Optional[str] = Field(min_length=3, max_length=30)
-  phone_number: Optional[CleanPhoneNumber]
-  email: Optional[str]
-  postal_code: Optional[str]
-  age: Optional[int] = Field(ge=21, description="Must be 21 or older")
+  name: Optional[str] = Field(min_length=3, max_length=30, default=None)
+  phone_number: Optional[CleanPhoneNumber] = None
+  email: Optional[str] = None
+  postal_code: Optional[str] = None
+  age: Optional[int] = Field(ge=21, description="Must be 21 or older", default=None)
 
 class ReservationOccasion(str, Enum):
   bday = "Birthday"
@@ -70,9 +70,9 @@ class ReservationCreatedConfirm(BaseModel):
   reservation_id: str
 
 class ReservationUpdate(BaseModel):
-  name: Optional[str] = Field(min_length=3, max_length=30)
-  phone_number: Optional[CleanPhoneNumber]
-  num_guests: Optional[int] = Field(ge=1)
-  occasion: Optional[ReservationOccasion]
-  date: Optional[date]
-  time: Optional[time]
+  name: Optional[str] = Field(min_length=3, max_length=30, default=None)
+  phone_number: Optional[CleanPhoneNumber] = None
+  num_guests: Optional[int] = Field(ge=1, default=None)
+  occasion: Optional[ReservationOccasion] = None
+  date: Optional[date] = None
+  time: Optional[time] = None

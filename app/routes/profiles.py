@@ -12,15 +12,14 @@ profiles = load_profiles_data()
 # Use a Dependency to fetch the authenticated user's profile
 @router.get("/profile", response_model=ProfileView)
 async def get_profile(current_user: dict = Depends(get_current_user)):
-  if not profiles:
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile not found")
   for profile in profiles:
     if profile["created_by"] == current_user["username"]:
       return profile
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile not found")
 
 # Create Profile
 # Use status_code=200 (Created) on success
-@router.post("/profiles")
+@router.post("/profiles", status_code=status.HTTP_201_CREATED)
 async def create_profile(profile: ProfileCreate, current_user: dict = Depends(get_current_user)):
   new_profile = {"id": uuid.uuid4().hex, **profile.model_dump(), "created_by": current_user["username"]}
   profiles.append(new_profile)

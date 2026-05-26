@@ -56,7 +56,7 @@ async def cancel_reservation(date: date):
 async def update_reservation(date: date, reservation_update: ReservationUpdate):
   for reservation in reservations:
     if reservation["date"] == date.isoformat():
-      update_data = reservation_update.model_dump(exclude_unset=True)
+      update_data = reservation_update.model_dump(exclude_unset=True, mode='json')
       reservation.update(update_data)
       save_reservations_data(reservations)
       return reservation
