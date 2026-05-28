@@ -4,7 +4,7 @@ from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # 2. Type whatever you want your test password to be right here
-my_hash = pwd_context.hash("getin00")
+my_hash = pwd_context.hash("password123")
 
 # 3. Print it out to the terminal!
 print(my_hash)

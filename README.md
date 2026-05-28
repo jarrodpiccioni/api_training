@@ -1,11 +1,18 @@
 # api_training
 ## Notes:
-- Resources used:
+### Resources used:
   - https://www.youtube.com/watch?v=8TMQcRcBnW8
   - https://devsheets.io/sheets/fastapi
   - https://fastapi.tiangolo.com/learn/
   - https://pydantic.dev/docs/validation/latest/get-started/
   - Gemini Pro assisted with debugging, not generating code
+  - https://telusinternational.udemy.com/course/fastapi-the-complete-course/
+
+### Testing Notes:
+  - Auth implemented via Oauth2/JWT. To test this out in Swagger, first hit the **Authorize** button and authenticate with:
+    - Username: test
+    - Password: password123
+  - After authenticating, you'll be able to hit the "GET profiles" and "POST profiles" endpoints
 
 ## API Architecture:
 |Functionality|Recommended RESTful Path|HTTP Method|Notes for Training Assignment|Status|
